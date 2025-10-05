@@ -1,6 +1,6 @@
-# Bulk_RNAseq_Pipeline_GSE158550
+# Bulk RNA-Seq Analysis Pipeline
 
-**Obtained raw data** from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305)  
+**Obtained raw data** from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305) GSE158550  
 **Reference paper** from [Nature communications](https://doi.org/10.1038/s41467-018-08133-6)
 
 **Environment:** Windows Subsystem for Linux (Ubuntu)  
@@ -253,7 +253,7 @@ _Runs an R script to install any R dependencies required by Qualimap._
 ./qualimap_v2.3/qualimap rnaseq -bam fastq/PC3_Normoxia_S2.bam -gtf Homo_sapiens.GRCh38.114.gtf –outdir fastq/gtf –java-mem-size=6G
 ```
 
-_Runs Qualimap RNA-seq on the `LNCAP_Hypoxia_S1.bam` using the provided '.gtf' and directs output to `fastq/gtf` with 6 GB Java heap size. The same Qualimap command is run for each sample BAM; see the script for all sample lines._
+_Runs Qualimap RNA-seq on the `LNCAP_Hypoxia_S1.bam` using the provided '.gtf' and directs output to `fastq/gtf` with 6 GB Java heap size. The same Qualimap command is run for each sample BAM; see the script for all sample lines._  
 **You can visualize '.bam' files using [IGV Tools](https://igv.org/).**
 
 
@@ -351,7 +351,7 @@ This section explains the reasoning and biological/computational concepts behind
 
 ### Why HISAT2 and not STAR?
 - **HISAT2** was chosen for its:
-  - **Low memory footprint** — suitable for mid-range systems (~16 GB RAM) and WSL setups.
+  - **Low memory footprint** - suitable for mid-range systems (~16 GB RAM) and WSL setups.
   - **Fast and accurate alignment** of reads to the reference genome using FM-index and graph-based alignment for spliced reads.
 - **STAR**, while faster for large servers, can require >32 GB RAM for human genomes, which is infeasible on many local systems.
 - HISAT2 integrates seamlessly with **SAMtools** and **featureCounts** in lightweight pipelines.
