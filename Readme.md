@@ -1,8 +1,8 @@
 # Bulk_RNAseq_Pipeline_GSE158550
 
-**Dataset / Workshop:** Bulk RNA-Seq tutorial reproduced from [here](https://erilu.github.io/bulk-rnaseq-analysis/)
-**Workshop Instructor:** [Smriti Arora](https://www.linkedin.com/in/smritiarora79976a91)
-**Obtained raw data from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305)
+**Dataset / Workshop:** Bulk RNA-Seq tutorial reproduced from [here](https://erilu.github.io/bulk-rnaseq-analysis/)  
+**Workshop Instructor:** [Smriti Arora](https://www.linkedin.com/in/smritiarora79976a91)  
+**Obtained raw data from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305)  
 **Reference paper from [Nature communications](https://doi.org/10.1038/s41467-018-08133-6)
 
 **Environment:** Windows Subsystem for Linux (Ubuntu)  
@@ -18,7 +18,7 @@ This repository documents a **beginner-friendly, reproducible** Bulk RNA-Seq ana
 ---
 
 ## Data & reference policy (why we don’t commit everything)
-- **Did not commit** raw `.sra`, raw `*.fastq.gz`, `*.bam`, and aligner index files (they are huge).  
+- **Did not commit** raw `.sra`, raw `.fastq.gz`, `.bam` and aligner index files (they are huge).  
 - Kept small, essential files in the repo: `sample_info.csv`, `featureCounts` counts matrix (CSV), a few representative QC HTMLs (MultiQC, FastQC) and small logs.  
 
 ---
@@ -91,7 +91,8 @@ _Renames `SRR7179536_pass.fastq.gz` to the biologically meaningful sample name `
 rm SRR*
 ```
 
-_Removes (deletes) all files starting with `SRR` in the current directory. **Note:** This permanently removes those files — keep a screenshot or backup if you want to keep the raw SRR files._
+_Removes (deletes) all files starting with `SRR` in the current directory._  
+**Note:** This permanently removes those files - keep a screenshot or backup if you want to keep the raw SRR files.
 
 
 
@@ -110,7 +111,7 @@ _Installs FastQC on Debian/Ubuntu systems so the `fastqc` program is available._
 fastqc fastq/*.fastq.gz -o fastqc_results/ --threads 8
 ```
 
-_Runs FastQC on all FASTQ files in the folder `fastq/`, writes per-sample FastQC output into a new folder `fastqc_results/`, and uses 8 threads to speed up processing._
+_Runs FastQC on all FASTQ files in the folder `fastq/`, writes per-sample FastQC output into a new folder `fastqc_results/` and uses 8 threads to speed up processing._
 
 ```
 #10
@@ -124,8 +125,8 @@ _Installs MultiQC (system-level) so you can aggregate many QC reports into a sin
 multiqc fastqc_results/ -o multiqc_report/
 ```
 
-_Runs MultiQC over the `fastqc_results/` folder and writes a combined report into folder `multiqc_report/` (HTML and supporting files)._
-*MultiQC screenshot '11_multiqc.png' is available in '/Screenshots' folder for reference.*
+_Runs MultiQC over the `fastqc_results/` folder and writes a combined report into folder `multiqc_report/` (HTML and supporting files)._  
+**MultiQC screenshot '11_multiqc.png' is available in '/Screenshots' folder for reference.**
 
 
 
@@ -137,7 +138,7 @@ _Runs MultiQC over the `fastqc_results/` folder and writes a combined report int
 java -jar trimmomatic-0.40.jar SE -threads 4 fastq/LNCAP_Hypoxia_S1.fastq.gz fastq/LNCAP_Hypoxia_S1_trimmed.fastq TRAILING:10 -phred33
 ```
 
-_Download Trimmomatic from [here](http://www.usadellab.org/cms/?page=trimmomatic)
+**Download Trimmomatic from [here](http://www.usadellab.org/cms/?page=trimmomatic)**  
 _Runs Trimmomatic in single-end (SE) mode on `fastq/LNCAP_Hypoxia_S1.fastq.gz`, writes trimmed output to `fastq/LNCAP_Hypoxia_S1_trimmed.fastq`, trims trailing bases with quality < 10, and assumes Phred+33 quality encoding._
 
 ```
@@ -145,13 +146,13 @@ _Runs Trimmomatic in single-end (SE) mode on `fastq/LNCAP_Hypoxia_S1.fastq.gz`, 
 fastqc fastq/*.fastq.gz -o fastqc_results/ --threads 8
 ```
 
-_Runs FastQC on all FASTQ files in `fastq/` (this will capture both original and trimmed files if both are present), writes FastQC reports to `fastqc_results/`, and uses 8 threads._
+_Runs FastQC on all FASTQ files in `fastq/` (this will capture both original and trimmed files if both are present), writes FastQC reports to `fastqc_results/` and uses 8 threads._  
 _We do this to check any differences between the original and trimmed sequences._
 
 
 
 
-## Step 4 - Get Human Genome / annotation
+## Step 4 - Get Human Genome / Annotation
 
 ```
 #14
@@ -191,22 +192,22 @@ _Installs SAMtools (for SAM/BAM conversion, sorting, indexing and stats)._
 cd fastq
 ```
 
-_Change directory into the `fastq/` folder where the sample FASTQ files and the alignment script (hisat2alignment.sh) are located._
+_Change directory into the `fastq/` folder where the sample FASTQ files and the alignment script 'hisat2alignment.sh' are located._
 
 ```
 #19
 ./hisat2alignment.sh
 ```
 
-_Runs the author's alignment script `hisat2alignment.sh`. This script should call `hisat2` for each sample and pipes output through `samtools` to create sorted/indexed BAM files and alignment summary statistics._
-*Script screenshot '19_hisat2.png' is available in '/Screenshots' folder for reference.*
+_Runs the author's alignment script `hisat2alignment.sh`. This script should call `hisat2` for each sample and pipes output through `samtools` to create sorted/indexed BAM files and alignment summary statistics._  
+**Script screenshot '19_hisat2.png' is available in '/Screenshots' folder for reference.**
 
 
 
 
-## Step 6 - Install Qualimap & run RNA-seq QC
+## Step 6 - Install Qualimap & run RNA-Seq QC
 
-Download Qualimap from [here](http://qualimap.conesalab.org/) and keep in root directory.
+Download Qualimap v2.3 from [here](http://qualimap.conesalab.org/) and keep in root directory.
 
 ```
 #20
@@ -227,7 +228,7 @@ _Installs R (core) which is needed by Qualimap dependencies and some R-based ins
 unzip qualimap_v2.3.zip
 ```
 
-_Unzip Qualimap distribution ver 2.3 into root directory._
+_Unzip Qualimap distribution into root directory._
 
 ```
 #23
@@ -238,8 +239,8 @@ cd ..
 
 _Runs an R script to install any R dependencies required by Qualimap._
 
-*Before going further, you must make changes to qualimap bash file to remove the default 1200M memory allocation, this will otherwise cause low memory problems in low end systems otherwise. In this case, we set the memory to 6G.*
-*You can check the error '23_error_qualimap.png' screenshot in '/Screenshots' folder for reference.*
+**Before going further, you must make changes to qualimap bash file to remove the default 1200M memory allocation, this will otherwise cause low memory problems in low end systems otherwise. In this case, we set the memory to 6G.**  
+**You can check the error '23_error_qualimap.png' screenshot in '/Screenshots' folder for reference.**
 
 ```
 #24
@@ -273,24 +274,24 @@ cd fastq
 mkdir -p quants
 ```
 
-_Creates an output directory `quants/` to store count results in the fastq directory._
+_Creates an output directory `quants/` to store count results in the fastq directory._  
 
-*Make sure to keep the Homo_sapiens.GRCh38.114.gtf file in fastq folder or define its path properly in script.*
+**Make sure to keep the Homo_sapiens.GRCh38.114.gtf file in fastq folder or define its path properly in script.**
 
 ```
 #27
 ./featurecounts.sh
 ```
 
-_Runs the `featurecounts.sh` script which calls `featureCounts` (subread) to generate the gene × sample counts matrix._
+_Runs the `featurecounts.sh` script which calls `featureCounts` (subread) to generate the gene × sample counts matrix._  
 
-*In case of permission denial error in #27, run the below command first.*
+**In case of permission denial error in #27, run the below command first.**
 
 ```
 #27a
 chmod +x featurecounts.sh
 ```
-*You can see the error and execution '27_featurecounts.png' screenshot in 'Screenshots' folder for reference.*
+**You can see the error and execution '27_featurecounts.png' screenshot in 'Screenshots' folder for reference.**
 
 
 
@@ -302,7 +303,7 @@ cd ..
 sudo apt install -y python3-pandas
 ```
 
-_Run this command if pandas library is not available and return to the root directory._
+_Run this command if 'pandas' library is not available and return to the root directory._
 
 ```
 #29
@@ -324,7 +325,7 @@ awk '$3 == "gene"' Homo_sapiens.GRCh38.114.gtf > genes_only.gtf
 wc -l genes_only.gtf
 ```
 
-_wc command counts the number of lines in the original GTF (gives an idea of file size/complexity)._
-_Main command here is awk, where we Filter the GTF to keep only rows whose 3rd column is `gene`, writing the result to `genes_only.gtf`. This produces an annotation file with only gene-level records._
+_'wc' command counts the number of lines in the original '.gtf' (gives an idea of file size/complexity)._
+_Main command here is awk, where we Filter the '.gtf' to keep only rows whose 3rd column is `gene`, writing the result to `genes_only.gtf`. This produces an annotation file with only gene-level records._
 
-*After this step, we will open 'gene_only.gtf' in Excelsheet to arrange the data in 3 columns- Geneid, Genebiotype and Genesymbol. Save this file as 'GRCh38annotation.csv'.
+**After this step, we will open 'gene_only.gtf' in Excelsheet to arrange the data in 3 columns- Geneid, Genebiotype and Genesymbol. Save this file as 'GRCh38annotation.csv'.**
