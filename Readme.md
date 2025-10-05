@@ -1,7 +1,5 @@
 # Bulk_RNAseq_Pipeline_GSE158550
 
-**Dataset / Workshop:** Bulk RNA-Seq tutorial reproduced from [here](https://erilu.github.io/bulk-rnaseq-analysis/)  
-**Workshop Instructor:** [Smriti Arora](https://www.linkedin.com/in/smritiarora79976a91)  
 **Obtained raw data** from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305)  
 **Reference paper** from [Nature communications](https://doi.org/10.1038/s41467-018-08133-6)
 
@@ -147,7 +145,8 @@ fastqc fastq/*.fastq.gz -o fastqc_results/ --threads 8
 ```
 
 _Runs FastQC on all FASTQ files in `fastq/` (this will capture both original and trimmed files if both are present), writes FastQC reports to `fastqc_results/` and uses 8 threads._  
-_We do this to check any differences between the original and trimmed sequences._
+_We do this to check any differences between the original and trimmed sequences._  
+**We only performed Trimming on one sample only just to check how much it affects the quality of the sequence, you may go ahead and perform QC on all the files.**
 
 
 
@@ -254,7 +253,8 @@ _Runs an R script to install any R dependencies required by Qualimap._
 ./qualimap_v2.3/qualimap rnaseq -bam fastq/PC3_Normoxia_S2.bam -gtf Homo_sapiens.GRCh38.114.gtf –outdir fastq/gtf –java-mem-size=6G
 ```
 
-_Runs Qualimap RNA-seq on the `LNCAP_Hypoxia_S1.bam` using the provided GTF and directs output to `fastq/gtf` with 6 GB Java heap size. The same Qualimap command is run for each sample BAM; see the script for all sample lines._
+_Runs Qualimap RNA-seq on the `LNCAP_Hypoxia_S1.bam` using the provided '.gtf' and directs output to `fastq/gtf` with 6 GB Java heap size. The same Qualimap command is run for each sample BAM; see the script for all sample lines._
+**You can visualize '.bam' files using [IGV Tools](https://igv.org/).**
 
 
 
@@ -329,3 +329,140 @@ _'wc' command counts the number of lines in the original '.gtf' (gives an idea o
 _Main command here is awk, where we Filter the '.gtf' to keep only rows whose 3rd column is `gene`, writing the result to `genes_only.gtf`. This produces an annotation file with only gene-level records._
 
 **After this step, we will open 'gene_only.gtf' in Excelsheet to arrange the data in 3 columns- Geneid, Genebiotype and Genesymbol. Save this file as 'GRCh38annotation.csv'.**
+
+
+
+
+## Concepts involved and Decision-making
+
+This section explains the reasoning and biological/computational concepts behind the main choices made in this pipeline. It’s meant to help learners understand **why** specific tools, parameters and workflows were chosen.
+
+---
+
+### Why use the latest genome annotation?
+- The annotation file (e.g., *Homo_sapiens.GRCh38.114.gtf*) defines genomic features such as genes, exons and transcripts.
+- Using the **latest Ensembl release** ensures:
+  - Newly discovered genes and isoforms are included.
+  - Deprecated or mis-annotated genes from older releases are corrected.
+  - Gene biotypes and IDs are compatible with current databases (important for downstream tools like DESeq2 or Ensembl BioMart).
+- Mismatched or outdated annotations can cause incomplete or incorrect gene counts.
+
+---
+
+### Why HISAT2 and not STAR?
+- **HISAT2** was chosen for its:
+  - **Low memory footprint** — suitable for mid-range systems (~16 GB RAM) and WSL setups.
+  - **Fast and accurate alignment** of reads to the reference genome using FM-index and graph-based alignment for spliced reads.
+- **STAR**, while faster for large servers, can require >32 GB RAM for human genomes, which is infeasible on many local systems.
+- HISAT2 integrates seamlessly with **SAMtools** and **featureCounts** in lightweight pipelines.
+
+---
+
+### Why Trimming (Trimmomatic) before QC?
+- Sequencing adapters and low-quality bases at the 3′ ends of reads can cause misalignments or poor mapping quality.
+- **Trimmomatic** removes these, improving read quality.
+- Running **FastQC** before and after trimming allows visual comparison of improvement in read quality metrics.
+
+---
+
+### Why use FastQC and MultiQC together?
+- **FastQC** gives per-sample quality reports (per-base quality, GC content, adapter contamination).
+- **MultiQC** aggregates all FastQC outputs into one HTML report for easy cross-sample comparison.
+
+---
+
+### Why perform QC again after alignment (Qualimap)?
+- Pre-alignment QC tells us about raw data quality.
+- **Qualimap RNA-seq** assesses *alignment quality*:
+  - Proportion of reads mapping to exons, introns, intergenic regions.
+  - Coverage uniformity across transcripts.
+  - 3′/5′ bias and GC distribution.
+- This helps detect potential library preparation issues or poor mapping.
+
+---
+
+### Why featureCounts instead of HTSeq-count?
+- **featureCounts (Subread)** is faster, multi-threaded and memory-efficient.
+- It can handle multiple '.bam' files in one run and uses simple, consistent column formatting.
+- HTSeq-count is Python-based and single-threaded - better for small projects, but slower for large datasets.
+
+---
+
+### Why DESeq2 for Differential Expression?
+- **DESeq2** models read counts with a **Negative Binomial Distribution**, accounting for biological variability and library size.
+- It provides:
+  - Normalization by size factors.
+  - Shrinkage estimation for fold-change accuracy.
+  - Integrated variance stabilization and visualization tools.
+- Widely accepted as the gold standard for RNA-seq count-based analysis.
+
+---
+
+### Why not use TPM or FPKM for DE analysis?
+- TPM/FPKM normalize for transcript length and sequencing depth but **do not model count dispersion**.
+- DESeq2 works directly on raw counts - it performs internal normalization suitable for statistical testing.
+- TPM/FPKM are better for expression *visualization*, not for differential testing.
+
+---
+
+### Why separate scripts for each step?
+- Keeps the workflow **modular** - beginners can run or debug individual steps.
+- Easier to replace one component (e.g., change Trimmomatic to fastp) without affecting others.
+- Encourages understanding of each tool’s input/output.
+
+---
+
+### Why use a '.gtf' rather than a '.gff' file?
+- GTF (Gene Transfer Format) is the preferred annotation format for tools like 'featureCounts' and 'DESeq2'.
+- GFF3 is more general but less standardized in attribute columns; GTF provides consistent `gene_id` and `transcript_id` fields.
+
+---
+
+### Why merge SRR runs per condition before alignment?
+- GEO studies often provide multiple technical replicates per condition (e.g., SRR7179504–SRR7179507).
+- Merging them creates a single, larger FASTQ for that condition → more reads, better coverage.
+- Biological replicates (e.g., LNCAP_Hypoxia_S1 vs S2) are still kept separate for DESeq2 statistical testing.
+
+---
+
+### Why remove intermediate files (e.g., SRR*, .fastq.gz)?
+- To save disk space and keep the working directory clean.
+- Once concatenated and renamed, the intermediate 'SRR' files are no longer needed.
+
+---
+
+### Why not include raw data in GitHub?
+- FASTQ, BAM and index files are extremely large (>10GB).
+- GitHub’s file size limit is 100 MB per file.
+- Instead, links and commands for downloading are provided in `Readme.md`.
+
+---
+
+### Why use Ensembl rather than RefSeq annotations?
+- Ensembl provides well-maintained release cycles and consistent naming (gene IDs compatible with Bioconductor packages).
+- RefSeq is equally reliable but sometimes lags behind in version updates.
+- For reproducibility, always document which source and release number were used.
+
+---
+
+### Why re-check normalization and PCA before DE?
+- PCA and sample clustering validate if replicates group together correctly.
+- If a sample clusters far from others of the same condition, it might be an outlier (batch effect or technical error).
+
+---
+
+### Key Computational Concepts Highlighted
+- **Alignment vs. pseudoalignment:** HISAT2 performs alignment; tools like Salmon/Kallisto do pseudoalignment (faster but count-level only).  
+- **Count-based modeling:** DESeq2 uses raw integer counts, not normalized values.  
+- **Quality Control feedback loop:** Each QC step informs decisions about trimming, filtering or re-mapping.  
+- **Annotation consistency:** Using the same '.gtf' for featureCounts and downstream DE ensures gene IDs align perfectly.
+
+---
+
+### Summary
+This pipeline prioritizes **clarity, reproducibility and accessibility**:
+- Each step is transparent (manual commands instead of black-box scripts).
+- Choices are guided by system limitations and reproducible best practices.
+- Beginners can swap components as they learn (e.g., try STAR or Salmon later) and compare results.
+
+---
