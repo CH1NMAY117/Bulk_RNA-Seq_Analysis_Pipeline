@@ -2,8 +2,8 @@
 
 **Dataset / Workshop:** Bulk RNA-Seq tutorial reproduced from [here](https://erilu.github.io/bulk-rnaseq-analysis/)  
 **Workshop Instructor:** [Smriti Arora](https://www.linkedin.com/in/smritiarora79976a91)  
-**Obtained raw data from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305)  
-**Reference paper from [Nature communications](https://doi.org/10.1038/s41467-018-08133-6)
+**Obtained raw data** from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305)  
+**Reference paper** from [Nature communications](https://doi.org/10.1038/s41467-018-08133-6)
 
 **Environment:** Windows Subsystem for Linux (Ubuntu)  
 **System Requirements:** At least **16 GB RAM** (recommended)
