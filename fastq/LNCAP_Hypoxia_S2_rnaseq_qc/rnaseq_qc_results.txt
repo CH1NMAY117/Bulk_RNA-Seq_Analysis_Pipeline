@@ -1,0 +1,56 @@
+RNA-Seq QC report
+-----------------------------------
+
+>>>>>>> Input
+
+    bam file = fastq/LNCAP_Hypoxia_S2.bam
+    gff file = Homo_sapiens.GRCh38.114.gtf
+    counting algorithm = uniquely-mapped-reads
+    protocol = non-strand-specific
+    5'-3' bias region size = 100
+    5'-3' bias number of top transcripts = 1000
+
+
+>>>>>>> Reads alignment
+
+    reads aligned  = 53,587,832
+    total alignments = 61,831,062
+    secondary alignments = 8,243,230
+    non-unique alignments = 12,474,087
+    aligned to genes  = 41,161,345
+    ambiguous alignments = 3,006,041
+    no feature assigned = 5,169,439
+    not aligned = 3,645,943
+    SSP estimation (fwd/rev) = 0.04 / 0.96
+
+
+>>>>>>> Reads genomic origin
+
+    exonic =  41,161,345 (88.84%)
+    intronic = 4,531,151 (9.78%)
+    intergenic = 638,288 (1.38%)
+    overlapping exon = 1,927,261 (4.16%)
+
+
+>>>>>>> Transcript coverage profile
+
+    5' bias = 0.39
+    3' bias = 0.33
+    5'-3' bias = 1.11
+
+
+>>>>>>> Junction analysis
+
+    reads at junctions = 12,347,551
+
+    ACCT : 4.96%
+    AGGT : 4.68%
+    AGGA : 4.04%
+    TCCT : 3.68%
+    ATCT : 3.35%
+    AGCT : 2.74%
+    AGGC : 2.48%
+    GCCT : 2.46%
+    AGAT : 2.44%
+    AGGG : 2.43%
+    TTCT : 2.12%

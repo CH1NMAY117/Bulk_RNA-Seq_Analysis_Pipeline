@@ -1,0 +1,56 @@
+RNA-Seq QC report
+-----------------------------------
+
+>>>>>>> Input
+
+    bam file = fastq/PC3_Hypoxia_S1.bam
+    gff file = Homo_sapiens.GRCh38.114.gtf
+    counting algorithm = uniquely-mapped-reads
+    protocol = non-strand-specific
+    5'-3' bias region size = 100
+    5'-3' bias number of top transcripts = 1000
+
+
+>>>>>>> Reads alignment
+
+    reads aligned  = 67,417,656
+    total alignments = 145,657,754
+    secondary alignments = 78,240,098
+    non-unique alignments = 102,507,937
+    aligned to genes  = 36,938,710
+    ambiguous alignments = 1,721,448
+    no feature assigned = 4,487,841
+    not aligned = 4,669,600
+    SSP estimation (fwd/rev) = 0.02 / 0.98
+
+
+>>>>>>> Reads genomic origin
+
+    exonic =  36,938,710 (89.17%)
+    intronic = 3,747,588 (9.05%)
+    intergenic = 740,253 (1.79%)
+    overlapping exon = 583,836 (1.41%)
+
+
+>>>>>>> Transcript coverage profile
+
+    5' bias = 0.44
+    3' bias = 0.46
+    5'-3' bias = 0.92
+
+
+>>>>>>> Junction analysis
+
+    reads at junctions = 4,387,918
+
+    AGGT : 12.57%
+    GCCT : 6.6%
+    ACCT : 5.89%
+    AGGA : 3.02%
+    TCCT : 2.82%
+    ATCT : 2.35%
+    AGCT : 2.31%
+    AGGC : 2.15%
+    AGGG : 2.07%
+    AGAT : 1.87%
+    TTCT : 1.69%

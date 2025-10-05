@@ -1,0 +1,73 @@
+# === Bulk RNA-seq repo: ignore large raw & intermediate files ===
+
+# SRA / raw fastq
+*.sra
+fastq/*.fastq.gz
+
+# alignment files (large)
+fastq/*.bam
+fastq/*.bai
+fastq/*.fastq
+fastq/*.gz
+fastq/*.gtf
+
+# quants
+fastq/quants/*summary
+fastq/quants/*txt
+
+# grch38
+grch38/
+
+# hisat2
+hisat2/
+
+#miniconda
+miniconda3/
+
+# Qualimap binary / unpacked tree
+qualimap_v2.3/
+
+#samtools
+samtools-1.22.1/
+
+# tool jars / downloads
+trimmomatic-*.jar
+*.zip
+*.tar.gz
+
+# OS/editor/IDE cruft
+.DS_Store
+Thumbs.db
+*.swp
+*.egg-info/
+__pycache__/
+.cache
+.conda
+.config
+.java
+.landscape
+.ssh
+*.bash_history
+*bash_logout
+*.bashrc
+*.lesshst
+*.motd_shown
+*.profile
+*.python_history
+*.sudo_as_admin_successful
+*.wget-hsts
+
+# Large archives or storage dumps
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+
+# Allow/include these useful small result files (uncomment if you want to force include)
+# !results/counts/*
+# !results/multiqc_report/*
+# docs/screenshots/*
+
+# If you want to keep a small genes-only GTF, allow it explicitly (uncomment below)
+# !reference/genes_only.gtf

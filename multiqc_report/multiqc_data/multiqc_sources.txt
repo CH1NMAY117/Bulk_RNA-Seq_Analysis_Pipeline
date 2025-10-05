@@ -1,0 +1,9 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	LNCAP_Hypoxia_S2	/home/chief/fastqc_results/LNCAP_Hypoxia_S2_fastqc.zip
+FastQC	all_sections	PC3_Hypoxia_S2	/home/chief/fastqc_results/PC3_Hypoxia_S2_fastqc.zip
+FastQC	all_sections	LNCAP_Normoxia_S1	/home/chief/fastqc_results/LNCAP_Normoxia_S1_fastqc.zip
+FastQC	all_sections	LNCAP_Hypoxia_S1	/home/chief/fastqc_results/LNCAP_Hypoxia_S1_fastqc.zip
+FastQC	all_sections	PC3_Normoxia_S2	/home/chief/fastqc_results/PC3_Normoxia_S2_fastqc.zip
+FastQC	all_sections	PC3_Hypoxia_S1	/home/chief/fastqc_results/PC3_Hypoxia_S1_fastqc.zip
+FastQC	all_sections	LNCAP_Normoxia_S2	/home/chief/fastqc_results/LNCAP_Normoxia_S2_fastqc.zip
+FastQC	all_sections	PC3_Normoxia_S1	/home/chief/fastqc_results/PC3_Normoxia_S1_fastqc.zip

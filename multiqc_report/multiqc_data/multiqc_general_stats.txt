@@ -1,0 +1,9 @@
+Sample	FastQC_mqc-generalstats-fastqc-percent_duplicates	FastQC_mqc-generalstats-fastqc-percent_gc	FastQC_mqc-generalstats-fastqc-avg_sequence_length	FastQC_mqc-generalstats-fastqc-median_sequence_length	FastQC_mqc-generalstats-fastqc-percent_fails	FastQC_mqc-generalstats-fastqc-total_sequences
+LNCAP_Hypoxia_S1	74.58699122246803	46.0	76.0	76	20.0	50364498.0
+LNCAP_Hypoxia_S2	75.70979048883612	46.0	76.0	76	20.0	57233775.0
+LNCAP_Normoxia_S1	76.36123708150076	46.0	76.0	76	20.0	54979618.0
+LNCAP_Normoxia_S2	76.50914300585427	46.0	76.0	76	20.0	66734816.0
+PC3_Hypoxia_S1	84.749022963158	48.0	58.0	58	45.45454545454545	72087256.0
+PC3_Hypoxia_S2	78.27597966046154	48.0	58.0	58	45.45454545454545	24017740.0
+PC3_Normoxia_S1	83.75153657168597	50.0	58.0	58	36.36363636363637	26140310.0
+PC3_Normoxia_S2	87.80534602896805	49.0	58.0	58	36.36363636363637	76117196.0
