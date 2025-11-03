@@ -1,6 +1,6 @@
 # Bulk RNA-Seq Analysis Pipeline
 
-**Obtained raw data** from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305) GSE106305 
+**Obtained raw data** from [GEO GSE106305](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305)  
 **Reference paper** from [Nature communications](https://doi.org/10.1038/s41467-018-08133-6)
 
 **Environment:** Windows Subsystem for Linux (Ubuntu)  
@@ -467,3 +467,4 @@ This pipeline prioritizes **clarity, reproducibility and accessibility**:
 
 
 ---
+
