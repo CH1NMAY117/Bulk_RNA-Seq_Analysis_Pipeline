@@ -1,6 +1,6 @@
 # Bulk RNA-Seq Analysis Pipeline
 
-**Obtained raw data** from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305) GSE158550  
+**Obtained raw data** from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE106305) GSE106305 
 **Reference paper** from [Nature communications](https://doi.org/10.1038/s41467-018-08133-6)
 
 **Environment:** Windows Subsystem for Linux (Ubuntu)  
@@ -464,5 +464,6 @@ This pipeline prioritizes **clarity, reproducibility and accessibility**:
 - Each step is transparent (manual commands instead of black-box scripts).
 - Choices are guided by system limitations and reproducible best practices.
 - Beginners can swap components as they learn (e.g., try STAR or Salmon later) and compare results.
+
 
 ---
