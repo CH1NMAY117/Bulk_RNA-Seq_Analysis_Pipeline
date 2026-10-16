@@ -1,0 +1,5 @@
+# Keep generated QC reports out of GitHub language stats
+fastq/** linguist-generated
+fastqc_results/** linguist-generated
+multiqc_report/** linguist-generated
+*.Rmd linguist-detectable=true linguist-language=R
